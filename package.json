@@ -36,8 +36,10 @@
   },
   "keywords": [
     "react-native",
+    "power save mode",
     "ios",
-    "android"
+    "android",
+    "battery optimization"
   ],
   "repository": {
     "type": "git",
