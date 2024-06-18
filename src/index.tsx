@@ -1,4 +1,9 @@
-import { NativeModules, Platform } from 'react-native';
+import {
+  NativeEventEmitter,
+  NativeModules,
+  Platform,
+  type EmitterSubscription,
+} from 'react-native';
 
 const LINKING_ERROR =
   `The package 'react-native-power-save-mode' doesn't seem to be linked. Make sure: \n\n` +
@@ -17,6 +22,29 @@ const PowerSaveMode = NativeModules.PowerSaveMode
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return PowerSaveMode.multiply(a, b);
-}
+type PowerSaveModeListener = (data: { isPowerSaveMode: boolean }) => void;
+
+export const isPowerSaveModeEnabled = async (): Promise<boolean> => {
+  return new Promise((resolve, reject) => {
+    PowerSaveMode.isPowerSaveModeEnabled((error: any, result: boolean) => {
+      if (error) {
+        reject(!!error);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+};
+
+export const addPowerSaveModeListener = (
+  listener: PowerSaveModeListener
+): EmitterSubscription => {
+  const powerSaveModeEmitter = new NativeEventEmitter(PowerSaveMode);
+  return powerSaveModeEmitter.addListener('PowerSaveModeChanged', listener);
+};
+
+export const removePowerSaveModeListener = (
+  subscription: EmitterSubscription
+) => {
+  subscription.remove();
+};

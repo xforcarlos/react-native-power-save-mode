@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.powersavemode.PowerSaveModeModule;
+
 public class PowerSaveModePackage implements ReactPackage {
   @NonNull
   @Override
