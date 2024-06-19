@@ -1,6 +1,6 @@
 {
   "name": "react-native-power-save-mode",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Device power save mode detector for react native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

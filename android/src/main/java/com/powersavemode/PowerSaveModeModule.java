@@ -63,7 +63,12 @@ public class PowerSaveModeModule extends ReactContextBaseJavaModule {
       reactContext.registerReceiver(powerSaveModeReceiver, filter);
   }
 
- 
+  @ReactMethod
+  public void addListener(String eventName) {}
+
+  @ReactMethod
+  public void removeListeners(Integer count) {}
+
   private void sendEvent(String eventName, @NonNull WritableMap params) {
       reactContext
           .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
